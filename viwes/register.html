@@ -2,7 +2,7 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="../public/css/style.css">
-    <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../public/js/script.js" defer></script>
     <meta charset="utf-8">
     <title>Registration Page</title>
 </head>
@@ -21,11 +21,17 @@
             <h1>Rejestracja</h1>
             <div class="registration-container">
                 <form>
+                    <div class="container-text">Imie</div>
+                    <input name="name" type="text" placeholder="Imie">
+                    <div class="container-text">Nazwisko</div>
+                    <input name="surname" type="text" placeholder="Nazwisko">
                     <div class="container-text">E-mail</div>
                     <input name="email" type="text" placeholder="email@email.com">
-                    <div class="container-text">Password</div>
-                    <input name="password" type="password" placeholder="password">
-                    <button class="button" id="registration-button">Create</button>
+                    <div class="container-text">Haslo</div>
+                    <input name="password" type="password" placeholder="haslo">
+                    <div class="container-text">Potwierdz haslo</div>
+                    <input name="confirmedPassword" type="password" placeholder="Potwierdz haslo">
+                    <button type="submit" class="button" id="registration-button">Create</button>
                 </form>
             </div>
         </body>
