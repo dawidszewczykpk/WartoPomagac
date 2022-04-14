@@ -5,18 +5,20 @@ class User {
     private $password;
     private $name;
     private $surname;
-    private $phone;
-
+    private $permission;
+	
     public function __construct(
         string $email,
         string $password,
         string $name,
-        string $surname
+        string $surname,
+	string $permission
     ) {
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
         $this->surname = $surname;
+	$this->permission = $permission;
     }
 
     public function getEmail(): string 
@@ -47,5 +49,15 @@ class User {
     public function setSurname(string $surname): void
     {
         $this->surname = $surname;
+    }
+
+    public function getPermission(): int
+    {
+        return $this->permission;
+    }
+
+    public function setPermission(string $surname): void
+    {
+        $this->surname = $permission;
     }
 }

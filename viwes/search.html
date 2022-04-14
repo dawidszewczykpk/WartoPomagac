@@ -2,7 +2,9 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="../public/css/style.css">
-    <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../public/css/offer.css">
+    <script type="text/javascript" src="../public/js/search.js" defer></script>
+    <script type="text/javascript" src="../public/js/offers.js" defer></script>
     <meta charset="utf-8">
     <title>Search Page</title>
 </head>
@@ -18,66 +20,192 @@
         </nav>
 
         <body>
-            <h1>Wyszukaj oferte</h1>
-            <div class="search-panel">
-                <select name="province" id="province">
-                    <option value="default">Województwo</option>
-                    <option value="malopolska">Małopolskie</option>
-                </select>
+            <div class="search-body-container">
+                <h1>Wyszukaj oferte</h1>
+                <form class="search-panel">
+                    <select name="province" id="province">
+                        <option value="default">Województwo</option>
+                        <option value="malopolska">Małopolskie</option>
+                    </select>
 
-                <select name="city" id="city">
-                    <option value="default">Miasto</option>
-                    <option value="krakow">Kraków</option>
-                </select>
+                    <select name="city" id="city">
+                        <option value="default">Miasto</option>
+                        <option value="krakow">Kraków</option>
+                    </select>
 
-                <select name="number-of-people" id="number-of-people">
-                    <option value="default">Ilość osób</option>
-                    <option value="two">2</option>
-                </select>
+                    <select name="number-of-people" id="number-of-people">
+                        <option value="default">Ilość osób</option>
+                        <option value="two">2</option>
+                    </select>
 
-                <button type="submit" class="button" id="search-button">Search</button>
+                    <div class="button" id="search-button">
+                        <p>Szukaj</p>
+                    </div>
+                </form>
+                <div class="show-offerts-panel">
+                    <div class="show-panel-left">
+                        <div id="left">
+                            <img src="../img/angle-left-solid.svg">
+                        </div>
+                    </div>
+                    <div class="show-panel-left-center">
+                        <div><img src="../img/czarny.jpg"></div>
+                        <ul class="show-panel-ul">
+                            <li class="show-panel-name" id="show-panel-name">Name Surename</li>
+                            <li id="show-panel-city">Krakow</li>
+                            <li id="show-panel-ammount">Pokoje: 2</li>
+                            <li id="show-panel-time">Czas: 2 miesiace</li>
+                        </ul>
+                        <button class="button-show-panel" id="show-panel-left-button">CONTACT</button>
+                    </div>
+                    <div class="show-panel-center">
+                        <div><img src="../img/czarny.jpg"></div>
+                        <ul class="show-panel-ul">
+                            <li class="show-panel-name" id="show-panel-left-name">Name Surename</li>
+                            <li id="show-panel-city">Krakow</li>
+                            <li id="show-panel-ammount">Miejsca: 2</li>
+                            <li id="show-panel-time">Czas: 2 miesiace</li>
+                        </ul>
+                        <button class="button-show-panel" id="show-panel-button">CONTACT</button>
+                    </div>
+                    <div class="show-panel-right-center">
+                        <div><img src="../img/helpbox-contact.jpg"></div>
+                        <ul class="show-panel-ul">
+                            <li class="show-panel-name" id="show-panel-name">sdfsdfdsf sdfdsf</li>
+                            <li id="show-panel-city">fedfd</li>
+                            <li id="show-panel-ammount">Pokoje: 3</li>
+                            <li id="show-panel-time">Czas: 1 miesiace</li>
+                        </ul>
+                        <button class="button-show-panel" id="show-panel-button">CONTACT</button>
+                    </div>
+                    <div class="show-panel-right">
+                        <div id="right">
+                            <img src="../img/angle-right-solid.svg">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="show-offerts-panel">
-                <div class="show-panel-left">
-                    <div id="left">
-                        <img src="../img/angle-left-solid.svg">
+
+            <div class="show-offers-container" style="display: none">
+                <div id="full-photo-section">
+                    <img src="../img/czarny.jpg">
+                    <button class="button" id="show-offer-button">Wiecje informacji</button>
+                </div>
+                <section id="offers-section">
+                    <div class="single-offer">
+                        <img src="../img/czarny.jpg">
+                        <div>
+                            <ul class="header-nav">
+                                <li class="single-offer-li">
+                                    <p id="single-offer-city"> Miasto: Krakow</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-peoples">Ilosc osob: 2</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-time">Czas: 2 miesiace</p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="show-panel-left-center">
-                    <div id="show-panel-left-portrait"><img src="../img/czarny.jpg"></div>
-                    <ul class="show-panel-ul">
-                        <li class="show-panel-name" id="show-panel-left-name">Name Surename</li>
-                        <li id="show-panel-left-city">Krakow</li>
-                        <li id="show-panel-left-room">Pokoje: 2</li>
-                        <li id="show-panel-left-time">Czas: 2 miesiace</li>
-                    </ul>
-                    <button class="button-show-panel" id="show-panel-left-button">CONTACT</button>
-                </div>
-                <div class="show-panel-center">
-                    <div id="show-panel-center-portrait"><img src="../img/czarny.jpg"></div>
-                    <ul class="show-panel-ul">
-                        <li class="show-panel-name" id="show-panel-center-name">Name Surename</li>
-                        <li id="show-panel-center-city">Krakow</li>
-                        <li id="show-panel-center-room">Pokoje: 2</li>
-                        <li id="show-panel-center-time">Czas: 2 miesiace</li>
-                    </ul>
-                    <button class="button-show-panel" id="show-panel-center-button">CONTACT</button>
-                </div>
-                <div class="show-panel-right-center">
-                    <div id="show-panel-center-portrait"><img src="../img/czarny.jpg"></div>
-                    <ul class="show-panel-ul">
-                        <li class="show-panel-name" id="show-panel-right-name">Name Surename</li>
-                        <li id="show-panel-right-city">Krakow</li>
-                        <li id="show-panel-right-room">Pokoje: 2</li>
-                        <li id="show-panel-right-time">Czas: 2 miesiace</li>
-                    </ul>
-                    <button class="button-show-panel" id="show-panel-right-button">CONTACT</button>
-                </div>
-                <div class="show-panel-right">
-                    <div id="right">
-                        <img src="../img/angle-right-solid.svg">
+                    <div class="single-offer">
+                        <img
+                            src="http://critterbabies.com/wp-content/gallery/kittens/happy-kitten-kittens-5890512-1600-1200.jpg">
+                        <div>
+                            <ul class="header-nav">
+                                <li class="single-offer-li">
+                                    <p id="single-offer-city"> Miasto: Krakow</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-peoples">Ilosc osob: 2</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-time">Czas: 2 miesiace</p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                    <div class="single-offer">
+                        <img src="../img/helpbox-contact.jpg">
+                        <div>
+                            <ul class="header-nav">
+                                <li class="single-offer-li">
+                                    <p id="single-offer-city"> Miasto: Krakow</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-peoples">Ilosc osob: 2</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-time">Czas: 2 miesiace</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="single-offer">
+                        <img src="../img/czarny.jpg">
+                        <div>
+                            <ul class="header-nav">
+                                <li class="single-offer-li">
+                                    <p id="single-offer-city"> Miasto: Krakow</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-peoples">Ilosc osob: 2</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-time">Czas: 2 miesiace</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="single-offer">
+                        <img src="../img/czarny.jpg">
+                        <div>
+                            <ul class="header-nav">
+                                <li class="single-offer-li">
+                                    <p id="single-offer-city"> Miasto: Krakow</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-peoples">Ilosc osob: 2</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-time">Czas: 2 miesiace</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="single-offer">
+                        <img src="../img/czarny.jpg">
+                        <div>
+                            <ul class="header-nav">
+                                <li class="single-offer-li">
+                                    <p id="single-offer-city"> Miasto: Krakow</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-peoples">Ilosc osob: 2</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-time">Czas: 2 miesiace</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="single-offer">
+                        <img src="../img/czarny.jpg">
+                        <div>
+                            <ul class="header-nav">
+                                <li class="single-offer-li">
+                                    <p id="single-offer-city"> Miasto: Krakow</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-peoples">Ilosc osob: 2</p>
+                                </li>
+                                <li class="single-offer-li">
+                                    <p id="single-offer-time">Czas: 2 miesiace</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
             </div>
         </body>
 

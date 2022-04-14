@@ -16,20 +16,20 @@ function markValidation(element, condition) {
 
 function validateEmail() {
     setTimeout(function () {
-            markValidation(emailInput, isEmail(emailInput.value));
-        },
+        markValidation(emailInput, isEmail(emailInput.value));
+    },
         1000
     );
 }
 
 function validatePassword() {
     setTimeout(function () {
-            const condition = arePasswordsSame(
-                confirmedPasswordInput.previousElementSibling.value,
-                confirmedPasswordInput.value
-            );
-            markValidation(confirmedPasswordInput, condition);
-        },
+        const condition = arePasswordsSame(
+            confirmedPasswordInput.previousElementSibling.value,
+            confirmedPasswordInput.value
+        );
+        markValidation(confirmedPasswordInput, condition);
+    },
         1000
     );
 }
