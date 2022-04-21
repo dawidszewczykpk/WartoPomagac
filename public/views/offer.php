@@ -20,7 +20,16 @@
         <body>
             <h1>Dodaj ogłoszenie</h1>
             <div class="offer-container">
-                <form>
+                <form action="addOffer" method="POST" ENCTYPE="multipart/form-data">
+                    <div class="messages">
+                        <?php
+                            if(isset($messages)){
+                                foreach($messages as $message) {
+                                    echo $message;
+                                }
+                            }
+                        ?>
+                    </div>
                     <label class="offer-container-text" id="offer-container-province">Województwo</label>
                     <input name="input-offer-container-province" type="text" placeholder="Województwo">
 

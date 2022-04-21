@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="../public/css/style.css">
     <script type="text/javascript" src="../public/js/script.js" defer></script>
     <meta charset="utf-8">
-    <title>Registration Page</title>
+    <title>Register Page</title>
 </head>
 
 <body>
@@ -20,7 +20,16 @@
         <body>
             <h1>Rejestracja</h1>
             <div class="registration-container">
-                <form>
+                <form class="register" action="register" method="POST">
+                    <div class="messages">
+                        <?php
+                            if(isset($messages)){
+                                foreach($messages as $message) {
+                                    echo $message;
+                                }
+                            }
+                        ?>
+                    </div>
                     <div class="container-text">Imie</div>
                     <input name="name" type="text" placeholder="Imie">
                     <div class="container-text">Nazwisko</div>
