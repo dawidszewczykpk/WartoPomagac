@@ -14,8 +14,12 @@
         <nav>
             <ul class="header-nav">
                 <li class="header-li"><img src="../img/logo.svg"></li>
-                <li class="header-li"><a href="javascript:void(0)">Dodaj ogłoszenie</a></li>
-                <li class="header-li"><a href="javascript:void(0)">Szukaj</a></li>
+                <li id="header-li-show-search" class="header-li" style="display: none;"><a href="offer" >Dodaj ogłoszenie</a></li>
+                <?php
+                if(isset($_SESSION['email'])){
+                    echo "<script type=\"text/javascript\">document.getElementById('header-li-show-search').style.display = 'block';</script>";
+                }?>
+                <li class="header-li"><a href="search">Szukaj</a></li>
             </ul>
         </nav>
 
@@ -25,7 +29,10 @@
                 <form class="search-panel">
                     <select name="province" id="province">
                         <option value="default">Województwo</option>
-                        <option value="malopolska">Małopolskie</option>
+                        <?php foreach ($provinces as $province): ?>
+                            <option value="$project"><?= $province["name"]; ?></option>
+                        <?php endforeach; ?>
+
                     </select>
 
                     <select name="city" id="city">

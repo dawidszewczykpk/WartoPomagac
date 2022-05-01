@@ -27,6 +27,10 @@ button.addEventListener("click", function (event) {
     offerContainer.style.display = "flex";
 });
 
+document.addEventListener("DOMContentLoaded", function(){
+    //....
+});
+
 function leftClickFunction() {
     const newOffer = randomNewOffer(document.getElementsByClassName("show-panel-right-center")[0]);
     showPanelLeft[0].innerHTML = showPanelCenter[0].innerHTML;

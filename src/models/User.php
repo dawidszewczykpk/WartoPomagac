@@ -12,13 +12,13 @@ class User {
         string $password,
         string $name,
         string $surname,
-	string $permission
+        int $permission
     ) {
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
         $this->surname = $surname;
-	$this->permission = $permission;
+        $this->permission = $permission;
     }
 
     public function getEmail(): string 
@@ -36,14 +36,14 @@ class User {
         return $this->name;
     }
 
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
     public function getSurname(): string
     {
         return $this->surname;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     public function setSurname(string $surname): void
@@ -56,8 +56,8 @@ class User {
         return $this->permission;
     }
 
-    public function setPermission(string $surname): void
+    public function setPermission(int $permission): void
     {
-        $this->surname = $permission;
+        $this->permission = $permission;
     }
 }

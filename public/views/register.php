@@ -12,8 +12,8 @@
         <nav>
             <ul class="header-nav">
                 <li class="header-li"><img src="../img/logo.svg"></li>
-                <li class="header-li"><a href="javascript:void(0)">Dodaj ogłoszenie</a></li>
-                <li class="header-li"><a href="javascript:void(0)">Szukaj</a></li>
+                <li class="header-li"><a href="offer">Dodaj ogłoszenie</a></li>
+                <li class="header-li"><a href="search">Szukaj</a></li>
             </ul>
         </nav>
 
@@ -41,7 +41,7 @@
                     <div class="container-text">Potwierdź hasło</div>
                     <input name="confirmedPassword" type="password" placeholder="Potwierdz haslo">
                     <div class="container-text">Chcę dodać ofertę</div>
-                    <input type="checkbox" id="want-add-offer" name="want-add-offer" value="true">
+                    <input name="permission" type="checkbox" id="want-add-offer" name="want-add-offer" value="true">
                     <button type="submit" class="button" id="registration-button">Utwórz
                     </button>
                 </form>

@@ -37,8 +37,9 @@ class SecurityController extends AppController {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
+        $_SESSION['email'] = $email;
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/projects");
+        header("Location: {$url}/search");
     }
 
     public function register()
@@ -52,17 +53,24 @@ class SecurityController extends AppController {
         $confirmedPassword = $_POST['confirmedPassword'];
         $name = $_POST['name'];
         $surname = $_POST['surname'];
-        $phone = $_POST['phone'];
+        $permission = $_POST['permission'];
+
+        if($email === "" || $password === "" || $confirmedPassword === "" || $name === ""|| $surname === "" ) {
+            return $this->render('register', ['messages' => ['Complete all the necessary information!']]);
+        }
 
         if ($password !== $confirmedPassword) {
             return $this->render('register', ['messages' => ['Please provide proper password']]);
         }
 
-        //TODO try to use better hash function
-        $user = new User($email, md5($password), $name, $surname);
-        $user->setPhone($phone);
+        $permission_value = 1;
+        if($permission) {
+            $permission_value = 2;
+        }
+        $user = new User($email, md5($password), $name, $surname, $permission_value);
 
-        $this->userRepository->addUser($user);
+        if($this->userRepository->addUser($user) === false)
+            return $this->render('register', ['messages' => ['This email address already exists!']]);
 
         return $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
     }

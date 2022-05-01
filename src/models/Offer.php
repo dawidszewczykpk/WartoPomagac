@@ -1,81 +1,81 @@
 <?php
 
-class Project
+class Offer
 {
-    private $;
-    private $description;
-    private $image;
-    private $like;
-    private $dislike;
-    private $id;
+    private $user_email;
+    private $province;
+    private $city;
+    private $number_of_people;
+    private $time;
+    private $img;
 
-    public function __construct($title, $description, $image, $like = 0, $dislike = 0, $id = null)
+    public function __construct($user_email, $province, $city, $number_of_people, $time, $img)
     {
-        $this->title = $title;
-        $this->description = $description;
-        $this->image = $image;
-        $this->like = $like;
-        $this->dislike = $dislike;
-        $this->id = $id;
+        $this->user_email = $user_email;
+        $this->province = $province;
+        $this->city = $city;
+        $this->number_of_people = $number_of_people;
+        $this->time = $time;
+        $this->img = $img;
     }
 
-    public function getTitle()
+    public function getUserEmail()
     {
-        return $this->title;
+        return $this->user_email;
     }
 
-    public function setTitle($title)
+    public function setUserEmail($user_email)
     {
-        $this->title = $title;
+        $this->user_email = $user_email;
     }
 
-    public function getDescription()
+    public function getProvince()
     {
-        return $this->description;
+        return $this->province;
     }
 
-    public function setDescription($description)
+    public function setProvince($province)
     {
-        $this->description = $description;
+        $this->province = $province;
+    }
+
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    public function getNumberOfPeople(): int
+    {
+        return $this->number_of_people;
+    }
+
+    public function setNumberOfPeople(int $number_of_people): void
+    {
+        $this->number_of_people = $number_of_people;
+    }
+
+    public function getTime(): int
+    {
+        return $this->time;
+    }
+
+    public function setTime(int $time): void
+    {
+        $this->time = $time;
     }
 
     public function getImage()
     {
-        return $this->image;
+        return $this->img;
     }
 
-    public function setImage($image)
+    public function setImage($img)
     {
-        $this->image = $image;
-    }
-
-    public function getLike(): int
-    {
-        return $this->like;
-    }
-
-    public function setLike(int $like): void
-    {
-        $this->like = $like;
-    }
-
-    public function getDislike(): int
-    {
-        return $this->dislike;
-    }
-
-    public function setDislike(int $dislike): void
-    {
-        $this->dislike = $dislike;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id): void
-    {
-        $this->id = $id;
+        $this->img = $img;
     }
 }

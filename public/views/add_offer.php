@@ -12,8 +12,12 @@
         <nav>
             <ul class="header-nav">
                 <li class="header-li"><img src="../img/logo.svg"></li>
-                <li class="header-li"><a href="javascript:void(0)">Dodaj ogłoszenie</a></li>
-                <li class="header-li"><a href="javascript:void(0)">Szukaj</a></li>
+                <?php
+                    if($_SESSION['email'] !== 'guest'){
+                        echo "<script type=\"text/javascript\">document.getElementById('header-li-show').style.display = 'block';</script>";
+                }?>
+                <li id="header-li-show" class="header-li" style="display: none;"><a href="offer" >Dodaj ogłoszenie</a></li>
+                <li class="header-li"><a href="search">Szukaj</a></li>
             </ul>
         </nav>
 
