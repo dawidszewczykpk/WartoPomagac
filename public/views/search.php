@@ -27,22 +27,22 @@
             <div class="search-body-container">
                 <h1>Wyszukaj oferte</h1>
                 <form class="search-panel">
-                    <select name="province" id="province">
-                        <option value="default">Województwo</option>
+                    <select name="province" id="province-select">
+                        <option value="">Województwo</option>
                         <?php foreach ($provinces as $province): ?>
-                            <option value="$project"><?= $province["name"]; ?></option>
+                            <option value="<?= $province["name"]; ?>"><?= $province["name"]; ?></option>
                         <?php endforeach; ?>
-
                     </select>
 
                     <select name="city" id="city">
-                        <option value="default">Miasto</option>
-                        <option value="krakow">Kraków</option>
+                        <option value="">Miasto</option>
                     </select>
 
                     <select name="number-of-people" id="number-of-people">
-                        <option value="default">Ilość osób</option>
-                        <option value="two">2</option>
+                        <option value="">Ilość osób</option>
+                        <?php for ($x = 1; $x <= 10; $x++): ?>
+                            <option value="<?= $x; ?>"><?= $x; ?></option>
+                        <?php endfor; ?>
                     </select>
 
                     <div class="button" id="search-button">

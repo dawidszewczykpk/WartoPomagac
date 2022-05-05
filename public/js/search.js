@@ -1,7 +1,7 @@
 const form = document.querySelector("form");
 const offerContainer = document.querySelector(".show-offers-container");
 const searchContainer = document.querySelector(".search-body-container");
-const province = document.getElementById("province");
+const province = document.getElementById("province-select");
 const city = document.getElementById("city");
 const numberOfPeople = document.getElementById("number-of-people");
 const button = document.getElementById("search-button");
@@ -27,8 +27,27 @@ button.addEventListener("click", function (event) {
     offerContainer.style.display = "flex";
 });
 
-document.addEventListener("DOMContentLoaded", function(){
-    //....
+province.addEventListener("change", function (event) {
+
+    console.log(this.value);
+    const data = {province: this.value};
+
+    fetch("/cities", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(function (response) {
+        return response.json();
+    }).then(function (cities) {
+        city.innerHTML = "";
+        city.add(new Option('Miasto', ''));
+        cities.forEach(_city => {
+            city.add(new Option(_city['name'], _city['name']));
+        });
+
+    });
 });
 
 function leftClickFunction() {
@@ -94,7 +113,7 @@ function searchData() {
 }
 
 button.addEventListener("click", function (event) {
-    searchData
+    searchData();
 });
 
 function loadOffers(offer) {

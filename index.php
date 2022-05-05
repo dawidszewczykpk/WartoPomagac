@@ -11,6 +11,9 @@ Router::post('login', 'SecurityController');
 Router::post('register', 'SecurityController');
 Router::post('addOffer', 'OfferController');
 Router::post('search_projects', 'OfferController');
+Router::post('cities', 'SearchController');
+Router::post('random', 'SearchController');
+
 Router::get('search', 'SearchController');
 Router::get('offers', 'OfferController');
 
