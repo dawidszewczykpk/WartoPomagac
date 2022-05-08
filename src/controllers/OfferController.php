@@ -25,44 +25,42 @@ class OfferController extends AppController
         $this->render('offer', ['offers' => $offers]);
     }
 
-    public function addOffer()
+    public function add_offer()
     {
-        if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
-            move_uploaded_file(
-                $_FILES['file']['tmp_name'],
-                dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']
-            );
-
-            // TODO create new project object and save it in database
-            $project = new Project($_POST['title'], $_POST['description'], $_FILES['file']['name']);
-            $this->projectRepository->addProject($project);
-
-            return $this->render('projects', [
-                'messages' => $this->message,
-                'projects' => $this->projectRepository->getProjects()
-            ]);
+        if (!$this->isPost()) {
+            return $this->render('add_offer');
         }
 
-        return $this->render('add-project', ['messages' => $this->message]);
-    }
+        if(!isset($_SESSION['email']))
+            return $this->render('add_offer', ['messages' => "You do not have permission to create an offer"]);
+        else{
+            if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
+                move_uploaded_file(
+                    $_FILES['file']['tmp_name'],
+                    dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']
+                );
 
-    public function search()
-    {
-        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+                $offerProvince = $_POST['offer-province'];
+                $offerCity = $_POST['offer-city'];
+                $offerNumberOfPeople = $_POST['offer-number-of-people'];
+                $offerTime = $_POST['offer-time'];
 
-        if ($contentType === "application/json") {
-            $content = trim(file_get_contents("php://input"));
-            $decoded = json_decode($content, true);
+                if($offerProvince === "" || $offerCity === "" || $offerNumberOfPeople === "" || $offerTime === "") {
+                    return $this->render('add_offer', ['messages' => ['Complete all the necessary information!']]);
+                }
+                $offer = new Offer($_SESSION['email'],$offerProvince,$offerCity,$offerNumberOfPeople,$offerTime,$_FILES['file']['name']);
+                $this->offerRepository->addOffer($offer);
 
-            header('Content-type: application/json');
-            http_response_code(200);
+                return $this->render('search');
+            }
 
-            echo json_encode($this->projectRepository->getProjectByTitle($decoded['search']));
+            return $this->render('add_offer', ['messages' => $this->message]);
         }
     }
 
     private function validate(array $file): bool
     {
+
         if ($file['size'] > self::MAX_FILE_SIZE) {
             $this->message[] = 'File is too large for destination file system.';
             return false;

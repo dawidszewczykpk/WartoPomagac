@@ -184,6 +184,10 @@ select{
     align-items:center;
     justify-content:center
 }
+.show-panel-img{
+    width: 100%;
+    height: 50%;
+}
 .show-panel-left{
     display:flex;
     align-items:center;

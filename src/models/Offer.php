@@ -6,16 +6,16 @@ class Offer
     private $province;
     private $city;
     private $number_of_people;
-    private $time;
+    private $how_long;
     private $img;
 
-    public function __construct($user_email, $province, $city, $number_of_people, $time, $img)
+    public function __construct($user_email, $province, $city, $number_of_people, $how_long, $img)
     {
         $this->user_email = $user_email;
         $this->province = $province;
         $this->city = $city;
         $this->number_of_people = $number_of_people;
-        $this->time = $time;
+        $this->how_long = $how_long;
         $this->img = $img;
     }
 
@@ -59,14 +59,14 @@ class Offer
         $this->number_of_people = $number_of_people;
     }
 
-    public function getTime(): int
+    public function getHowLong(): int
     {
-        return $this->time;
+        return $this->how_long;
     }
 
-    public function setTime(int $time): void
+    public function setHowLong(int $time): void
     {
-        $this->time = $time;
+        $this->how_long = $time;
     }
 
     public function getImage()

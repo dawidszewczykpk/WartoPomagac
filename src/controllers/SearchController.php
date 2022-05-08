@@ -19,6 +19,24 @@ class SearchController extends AppController
         $this->render('search', ['projects' => $randomProjects, 'provinces' => $provinces]);
     }
 
+    public function show_offers()
+    {
+        if (!$this->isPost()) {
+            return $this->render('offers');
+        }
+        $province = $_POST['province'];
+        $city = $_POST['city'];
+        $numberOfPeople = $_POST['number-of-people'];
+
+        if ($province === "") {
+            $randomProjects = $this->offerRepository->getRandomProjects(3);
+            $provinces = $this->offerRepository->getProvinces();
+            return$this->render('search', ['projects' => $randomProjects, 'provinces' => $provinces, 'messages' => ['Complete the necessary data!']]);
+        }
+
+        $this->render('offers', ['offersList' => $this->offerRepository->getOffers($province, $city, $numberOfPeople)]);
+    }
+
     public function cities()
     {
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
@@ -35,30 +53,7 @@ class SearchController extends AppController
 
     public function random()
     {
-        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
-        if ($contentType === "application/json") {
-            $content = trim(file_get_contents("php://input"));
-            $decoded = json_decode($content, true);
-
-            header('Content-type: application/json; charset=utf-8');
-            http_response_code(200);
-
-            echo json_encode($this->offerRepository->getRandomProjects($decoded['count']));
-        }
-    }
-
-    public function search_projects()
-    {
-        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
-
-        if ($contentType === "application/json") {
-            $content = trim(file_get_contents("php://input"));
-            $decoded = json_decode($content, true);
-
-            header('Content-type: application/json');
-            http_response_code(200);
-
-            echo json_encode($this->projectRepository->getProjectByTitle($decoded['search']));
-        }
+        header('Content-type: application/json; charset=utf-8');
+        echo json_encode($this->offerRepository->getRandomProjects());
     }
 }

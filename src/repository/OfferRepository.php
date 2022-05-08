@@ -6,94 +6,102 @@ require_once __DIR__ . '/../models/Offer.php';
 class OfferRepository extends Repository
 {
 
-    public function getOffers(int $id): ?Offer
+    public function getOffers(string $province, string $city, string $numberOfPeople ): array
     {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM public.projects WHERE id = :id
-        ');
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
+        $result = [];
 
-        $project = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($province !== "" && $city !== "" && $numberOfPeople !== "")
+        {
+            $stmt = $this->database->connect()->prepare('
+            SELECT * FROM schemas.offers WHERE province = :province AND city = :city AND number_of_people >= :numberOfPeople;
+            ');
+            $stmt->bindParam(':province', $province, PDO::PARAM_INT);
+            $stmt->bindParam(':city', $city, PDO::PARAM_INT);
+            $stmt->bindParam(':numberOfPeople', $numberOfPeople, PDO::PARAM_INT);
+            $stmt->execute();
+            $offers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($project == false) {
-            return null;
+            foreach ($offers as $offer) {
+                $result[] = new Offer(
+                    $offer['user_email'],
+                    $offer['province'],
+                    $offer['city'],
+                    $offer['number_of_people'],
+                    $offer['how_long'],
+                    $offer['img']
+                );
+            }
         }
+        else if($province !== "" && $city !== "")
+        {
+            $stmt = $this->database->connect()->prepare('
+            SELECT * FROM schemas.offers WHERE province = :province AND city = :city;
+            ');
+            $stmt->bindParam(':province', $province, PDO::PARAM_INT);
+            $stmt->bindParam(':city', $city, PDO::PARAM_INT);
+            $stmt->execute();
+            $offers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return new Project(
-            $project['title'],
-            $project['description'],
-            $project['image']
-        );
+            foreach ($offers as $offer) {
+                $result[] = new Offer(
+                    $offer['user_email'],
+                    $offer['province'],
+                    $offer['city'],
+                    $offer['number_of_people'],
+                    $offer['how_long'],
+                    $offer['img']
+                );
+            }
+        }
+        else if($province !== "")
+        {
+            $stmt = $this->database->connect()->prepare('
+            SELECT * FROM schemas.offers WHERE province = :province;
+            ');
+            $stmt->bindParam(':province', $province, PDO::PARAM_INT);
+            $stmt->execute();
+            $offers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($offers as $offer) {
+                $result[] = new Offer(
+                    $offer['user_email'],
+                    $offer['province'],
+                    $offer['city'],
+                    $offer['number_of_people'],
+                    $offer['how_long'],
+                    $offer['img']
+                );
+            }
+        }
+        return $result;
     }
 
-    public function addProject(Project $project): void
+    public function addOffer(Offer $offer): void
     {
-        $date = new DateTime();
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO projects (title, description, image, created_at, id_assigned_by)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO schemas.offers (user_email, province, city, number_of_people, how_long, img)
+            VALUES (?, ?, ?, ?, ?, ?)
         ');
-
-        //TODO you should get this value from logged user session
-        $assignedById = 1;
-
         $stmt->execute([
-            $project->getTitle(),
-            $project->getDescription(),
-            $project->getImage(),
-            $date->format('Y-m-d'),
-            $assignedById
+            $offer->getUserEmail(),
+            $offer->getProvince(),
+            $offer->getCity(),
+            $offer->getNumberOfPeople(),
+            $offer->getHowLong(),
+            $offer->getImage()
         ]);
     }
 
-    public function getProjects(): array
+    public function getRandomProjects(): array
     {
         $result = [];
-
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM schemas.offers;
+            SELECT * FROM schemas.offers ORDER BY random() LIMIT 1;
         ');
         $stmt->execute();
-        $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $offers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($projects as $project) {
-            $result[] = new Project(
-                $project['title'],
-                $project['description'],
-                $project['image'],
-                $project['like'],
-                $project['dislike'],
-                $project['id']
-            );
-        }
-
-        return $result;
-    }
-
-    public function getRandomProjects(int $ammounts): array
-    {
-        $result = [];
-
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM schemas.offers;
-        ');
-        $stmt->execute();
-        $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-        foreach ($projects as $project) {
-            $result[] = new Project(
-                $project['title'],
-                $project['description'],
-                $project['image'],
-                $project['like'],
-                $project['dislike'],
-                $project['id']
-            );
-        }
-
-        return $result;
+        return $offers;
     }
 
     public function getProjectByTitle(string $searchString)
@@ -127,23 +135,5 @@ class OfferRepository extends Repository
         $stmt->bindParam(':province_name', $province_name, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function like(int $id) {
-        $stmt = $this->database->connect()->prepare('
-            UPDATE projects SET "like" = "like" + 1 WHERE id = :id
-         ');
-
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-    }
-
-    public function dislike(int $id) {
-        $stmt = $this->database->connect()->prepare('
-            UPDATE projects SET dislike = dislike + 1 WHERE id = :id
-         ');
-
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
     }
 }

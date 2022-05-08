@@ -7,7 +7,7 @@ class UserRepository extends Repository
 {
     public function getUserPermission(): ?int
     {
-        return $_SESSION['email'] === "" ? 1 : $this->getUser($_SESSION['email'])->getPermission();
+        return isset($_SESSION['email']) ? $this->getUser($_SESSION['email'])->getPermission() : 1;
     }
 
     public function getUser(string $email): ?User
