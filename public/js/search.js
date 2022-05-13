@@ -4,9 +4,9 @@ const city = document.getElementById("city");
 const leftClick = document.getElementById("left");
 const rightClick = document.getElementById("right");
 
-const showPanelLeft = document.querySelector(".show-panel-left-center");
-const showPanelCenter = document.querySelector(".show-panel-center");
-const showPanelRight = document.querySelector(".show-panel-right-center");
+const showPanelLeft = document.getElementsByClassName("show-panel-left-center");
+const showPanelCenter = document.getElementsByClassName("show-panel-center");
+const showPanelRight = document.getElementsByClassName("show-panel-right-center");
 
 leftClick.addEventListener("click", function (event) {
     leftClickFunction();
@@ -39,20 +39,20 @@ province.addEventListener("change", function (event) {
 });
 
 function leftClickFunction() {
-    showPanelLeft.innerHTML = showPanelCenter.innerHTML;
-    showPanelCenter.innerHTML = showPanelRight.innerHTML;
-    showPanelRight.innerHTML ="";
-    randomNewOffer(showPanelRight);
+    const newOffer = randomNewOffer();
+    showPanelLeft[0].innerHTML = showPanelCenter[0].innerHTML;
+    showPanelCenter[0].innerHTML = showPanelRight[0].innerHTML;
+    showPanelRight[0].innerHTML = newOffer.innerHTML;
 }
 
 function rightClickFunction() {
-    showPanelRight.innerHTML = showPanelCenter.innerHTML;
-    showPanelCenter.innerHTML = showPanelLeft.innerHTML;
-    showPanelLeft.innerHTML ="";
-    randomNewOffer(showPanelLeft);
+    const newOffer = randomNewOffer();
+    showPanelRight[0].innerHTML = showPanelCenter[0].innerHTML;
+    showPanelCenter[0].innerHTML = showPanelLeft[0].innerHTML;
+    showPanelLeft[0].innerHTML = newOffer.innerHTML;
 }
 
-function randomNewOffer(oierdolonyatgument) {
+function randomNewOffer() {
     fetch("/random", {
          method: "GET",
          headers: {
@@ -61,25 +61,30 @@ function randomNewOffer(oierdolonyatgument) {
      }).then(function (response) {
          return response.json()
      }).then(function (offer) {
-        oierdolonyatgument.appendChild(showNewOffer(offer))
+         return showNewOffer(offer)
      });
 }
 
 function showNewOffer(offer) {
-    const template = document.querySelector(".offer-template");
-    const element = offer[0];
-    const clone = template.content.cloneNode(true);
+    const template = document.querySelector("#offer-template");
 
+    const clone = template.cloneNode(true);
+    console.log(offer.image);
     const image = clone.querySelector("img");
-    image.src = `/public/uploads/${element.img}`;
+    image.src = `/public/uploads/${offer.img}`;
     const ul = clone.querySelector(".show-panel-ul");
-    const liProvince = clone.querySelector(".show-panel-province");
-    liProvince.innerHTML = element.province;
-    const liCity = clone.querySelector(".show-panel-city");
-    liCity.innerHTML = element.city;
-    const liAmmount = clone.querySelector(".show-panel-ammount");
-    liAmmount.innerHTML = element.number_of_people;
-    const liTime = clone.querySelector(".show-panel-time");
-    liTime.innerHTML = element.how_long;
+    const liProvince = clone.querySelector("#show-panel-province");
+    liProvince.innerHTML = offer.province;
+    const liCity = clone.querySelector("#show-panel-city");
+    liCity.innerHTML = offer.city;
+    const liAmmount = clone.querySelector("#show-panel-ammount");
+    liAmmount.innerHTML = offer.number_of_people;
+    const liTime = clone.querySelector("#show-panel-time");
+    liTime.innerHTML = project.time;
+    ul.appendChild(liProvince);
+    ul.appendChild(liCity);
+    ul.appendChild(liAmmount);
+    ul.appendChild(liTime);
+
     return clone;
 }

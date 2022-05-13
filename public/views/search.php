@@ -2,6 +2,7 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="../public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/offer.css">
     <script type="text/javascript" src="../public/js/search.js" defer></script>
     <meta charset="utf-8">
     <title>Search Page</title>
@@ -86,13 +87,13 @@
     </div>
 </body>
 
-<template class="offer-template">
-    <img class="show-panel-img" src="">
+<template id="offer-template">
+    <div><img src=""></div>
     <ul class="show-panel-ul">
-        <li class="show-panel-province"></li>
-        <li class="show-panel-city"></li>
-        <li class="show-panel-ammount"></li>
-        <li class="show-panel-time"></li>
+        <li id="show-panel-province"></li>
+        <li id="show-panel-city"></li>
+        <li id="show-panel-ammount"></li>
+        <li id="show-panel-time"></li>
     </ul>
     <button class="button-show-panel"></button>
 </template>
