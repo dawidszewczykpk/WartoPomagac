@@ -2,7 +2,6 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="../public/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/offer.css">
     <script type="text/javascript" src="../public/js/search.js" defer></script>
     <meta charset="utf-8">
     <title>Search Page</title>
@@ -10,18 +9,7 @@
 
 <body>
     <div class="search-container">
-        <nav>
-            <ul class="header-nav">
-                <li class="header-li"><img src="../img/logo.svg"></li>
-                <li id="header-li-show-search" class="header-li" style="display: none;"><a href="add_offer" >Dodaj ogłoszenie</a></li>
-                <?php
-                if(isset($_SESSION['email'])){
-                    echo "<script type=\"text/javascript\">document.getElementById('header-li-show-search').style.display = 'block';</script>";
-                }?>
-                <li class="header-li"><a href="search">Szukaj</a></li>
-            </ul>
-        </nav>
-
+        <?php include 'nav.php';?>
         <body>
             <h1>Wyszukaj oferte</h1>
             <div class="messages">
@@ -76,24 +64,17 @@
             </div>
         </body>
 
-        <footer>
-            <ul class="footer-nav">
-                <li class="footer-li">
-                    <div><a href="javascript:void(0)">Pomoc</a> <a href="javascript:void(0)">Szukaj</a> <a
-                            href="javascript:void(0)">Kontakt</a></div>
-                </li>
-            </ul>
-        </footer>
+        <?php include 'footer.php';?>
     </div>
 </body>
 
-<template id="offer-template">
-    <div><img src=""></div>
+<template class="offer-template">
+    <img class="show-panel-img" src="">
     <ul class="show-panel-ul">
-        <li id="show-panel-province"></li>
-        <li id="show-panel-city"></li>
-        <li id="show-panel-ammount"></li>
-        <li id="show-panel-time"></li>
+        <li class="show-panel-province"></li>
+        <li class="show-panel-city"></li>
+        <li class="show-panel-ammount"></li>
+        <li class="show-panel-time"></li>
     </ul>
     <button class="button-show-panel"></button>
 </template>

@@ -28,7 +28,8 @@ class OfferController extends AppController
     public function add_offer()
     {
         if (!$this->isPost()) {
-            return $this->render('add_offer');
+            $provinces = $this->offerRepository->getProvinces();
+            return $this->render('add_offer', ['provinces' => $provinces]);
         }
 
         if(!isset($_SESSION['email']))
@@ -46,15 +47,18 @@ class OfferController extends AppController
                 $offerTime = $_POST['offer-time'];
 
                 if($offerProvince === "" || $offerCity === "" || $offerNumberOfPeople === "" || $offerTime === "") {
-                    return $this->render('add_offer', ['messages' => ['Complete all the necessary information!']]);
+                    $provinces = $this->offerRepository->getProvinces();
+                    return $this->render('add_offer', ['messages' => ['Complete all the necessary information!', 'provinces' => $provinces]]);
                 }
                 $offer = new Offer($_SESSION['email'],$offerProvince,$offerCity,$offerNumberOfPeople,$offerTime,$_FILES['file']['name']);
                 $this->offerRepository->addOffer($offer);
 
-                return $this->render('search');
+                $provinces = $this->offerRepository->getProvinces();
+                return $this->render('search', ['provinces' => $provinces]);
             }
 
-            return $this->render('add_offer', ['messages' => $this->message]);
+            $provinces = $this->offerRepository->getProvinces();
+            return $this->render('add_offer', ['messages' => $this->message, 'provinces' => $provinces]);
         }
     }
 

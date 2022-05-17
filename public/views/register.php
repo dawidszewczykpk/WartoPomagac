@@ -9,14 +9,7 @@
 
 <body>
     <div class="search-container">
-        <nav>
-            <ul class="header-nav">
-                <li class="header-li"><img src="../img/logo.svg"></li>
-                <li class="header-li"><a href="offer">Dodaj ogłoszenie</a></li>
-                <li class="header-li"><a href="search">Szukaj</a></li>
-            </ul>
-        </nav>
-
+        <?php include 'nav.php';?>
         <body>
             <h1>Rejestracja</h1>
             <div class="registration-container">
@@ -47,14 +40,6 @@
                 </form>
             </div>
         </body>
-
-        <footer>
-            <ul class="footer-nav">
-                <li class="footer-li">
-                    <div><a href="javascript:void(0)">Pomoc</a> <a href="javascript:void(0)">Szukaj</a> <a
-                            href="javascript:void(0)">Kontakt</a></div>
-                </li>
-            </ul>
-        </footer>
+        <?php include 'footer.php';?>
     </div>
 </body>

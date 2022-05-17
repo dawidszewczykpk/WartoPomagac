@@ -53,15 +53,7 @@ class SearchController extends AppController
 
     public function random()
     {
-        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
-        if ($contentType === "application/json") {
-            $content = trim(file_get_contents("php://input"));
-            $decoded = json_decode($content, true);
-
-            header('Content-type: application/json; charset=utf-8');
-            http_response_code(200);
-
-            echo json_encode($this->offerRepository->getRandomProjects());
-        }
+        header('Content-type: application/json; charset=utf-8');
+        echo json_encode($this->offerRepository->getRandomProjects());
     }
 }

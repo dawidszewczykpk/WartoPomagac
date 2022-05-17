@@ -10,23 +10,11 @@
 
 <body>
 <div class="search-container">
-    <nav>
-        <ul class="header-nav">
-            <li class="header-li"><img src="../img/logo.svg"></li>
-            <li id="header-li-show-search" class="header-li" style="display: none;"><a href="add_offer" >Dodaj ogłoszenie</a></li>
-            <?php
-            if(isset($_SESSION['email'])){
-                echo "<script type=\"text/javascript\">document.getElementById('header-li-show-search').style.display = 'block';</script>";
-            }?>
-            <li class="header-li"><a href="search">Szukaj</a></li>
-        </ul>
-    </nav>
-
+    <?php include 'nav.php';?>
     <body>
-
     <div class="show-offers-container">
         <div id="full-photo-section">
-            <img src="../img/czarny.jpg">
+            <img src="/public/uploads/<?= $offersList[0]->getImage(); ?>">
             <button class="button" id="show-offer-button">Wiecje informacji</button>
         </div>
         <section id="offers-section">
@@ -51,14 +39,6 @@
         </section>
     </div>
     </body>
-
-    <footer>
-        <ul class="footer-nav">
-            <li class="footer-li">
-                <div><a href="javascript:void(0)">Pomoc</a> <a href="javascript:void(0)">Szukaj</a> <a
-                        href="javascript:void(0)">Kontakt</a></div>
-            </li>
-        </ul>
-    </footer>
+    <?php include 'footer.php';?>
 </div>
 </body>

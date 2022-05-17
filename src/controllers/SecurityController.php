@@ -42,6 +42,14 @@ class SecurityController extends AppController {
         header("Location: {$url}/search");
     }
 
+    public function logout()
+    {
+        if ($this->isGet()) {
+            session_destroy();
+            return $this->render('login');
+        }
+    }
+
     public function register()
     {
         if (!$this->isPost()) {

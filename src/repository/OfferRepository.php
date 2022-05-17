@@ -92,47 +92,16 @@ class OfferRepository extends Repository
         ]);
     }
 
-    public function getProjects(): array
+    public function getRandomProjects(): array
     {
-
-
+        $result = [];
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM schemas.offers;
-        ');
-        $stmt->execute();
-        $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($projects as $project) {
-            $result[] = new Project(
-                $project['title'],
-                $project['description'],
-                $project['image'],
-                $project['like'],
-                $project['dislike'],
-                $project['id']
-            );
-        }
-
-        return $result;
-    }
-
-    public function getRandomProjects(): ?Offer
-    {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM schemas.offers;
+            SELECT * FROM schemas.offers ORDER BY random() LIMIT 1;
         ');
         $stmt->execute();
         $offers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $randNumber = random_int ( 0 , count($offers)-1 );
-        return new Offer(
-            $offers[$randNumber]['user_email'],
-            $offers[$randNumber]['province'],
-            $offers[$randNumber]['city'],
-            $offers[$randNumber]['number_of_people'],
-            $offers[$randNumber]['how_long'],
-            $offers[$randNumber]['img']
-        );
+        return $offers;
     }
 
     public function getProjectByTitle(string $searchString)
