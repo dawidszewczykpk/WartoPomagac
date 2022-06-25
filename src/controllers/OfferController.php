@@ -50,6 +50,14 @@ class OfferController extends AppController
                     $provinces = $this->offerRepository->getProvinces();
                     return $this->render('add_offer', ['messages' => ['Complete all the necessary information!', 'provinces' => $provinces]]);
                 }
+
+                $offerExist = $this->offerRepository->getOffers($offerProvince, $offerCity);
+
+                if ($offerExist) {
+                    $provinces = $this->offerRepository->getProvinces();
+                    return $this->render('add_offer', ['messages' => ['This offer already exists!'], 'provinces' => $provinces]);
+                }
+
                 $offer = new Offer($_SESSION['email'],$offerProvince,$offerCity,$offerNumberOfPeople,$offerTime,$_FILES['file']['name']);
                 $this->offerRepository->addOffer($offer);
 
@@ -64,7 +72,6 @@ class OfferController extends AppController
 
     private function validate(array $file): bool
     {
-
         if ($file['size'] > self::MAX_FILE_SIZE) {
             $this->message[] = 'File is too large for destination file system.';
             return false;

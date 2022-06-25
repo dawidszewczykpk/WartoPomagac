@@ -371,8 +371,11 @@ h1{
     .container{
         flex-direction:column
     }
-    *,.container-text,.create-account-text{
+    *,.container-text,.create-account-text,.offer-container, .offer-container-text{
         font-size:36px
+    }
+    li,.button-show-panel{
+        font-size:20px
     }
     #logo,.login-container{
         width:100%
@@ -390,5 +393,9 @@ h1{
         margin:auto;
         height:auto;
         width:70%
+    }
+
+    .show-offers-container{
+        flex-direction: column;
     }
 }

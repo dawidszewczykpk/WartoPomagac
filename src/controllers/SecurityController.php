@@ -23,6 +23,10 @@ class SecurityController extends AppController {
         $email = $_POST['email'];
         $password = md5($_POST['password']);
 
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $this->render('login', ['messages' => ['Enter a valid email address !']]);
+        }
+
         $user = $this->userRepository->getUser($email);
 
         if (!$user) {
@@ -65,6 +69,14 @@ class SecurityController extends AppController {
 
         if($email === "" || $password === "" || $confirmedPassword === "" || $name === ""|| $surname === "" ) {
             return $this->render('register', ['messages' => ['Complete all the necessary information!']]);
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $this->render('register', ['messages' => ['Enter a valid email address !']]);
+        }
+
+        if ($password !== $confirmedPassword) {
+            return $this->render('register', ['messages' => ['Please provide proper password']]);
         }
 
         if ($password !== $confirmedPassword) {
