@@ -41,6 +41,8 @@ class SecurityController extends AppController {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
+        if($user->getPermission() == 2)
+            $_SESSION['permission'] = 2;
         $_SESSION['email'] = $email;
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/search");

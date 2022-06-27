@@ -32,7 +32,7 @@ class OfferController extends AppController
             return $this->render('add_offer', ['provinces' => $provinces]);
         }
 
-        if(!isset($_SESSION['email']))
+        if(!isset($_SESSION['email']) || !isset($_SESSION['permission']) || (isset($_SESSION['permission']) && $_SESSION['permission'] !==2))
             return $this->render('add_offer', ['messages' => "You do not have permission to create an offer"]);
         else{
             if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
@@ -51,7 +51,7 @@ class OfferController extends AppController
                     return $this->render('add_offer', ['messages' => ['Complete all the necessary information!', 'provinces' => $provinces]]);
                 }
 
-                $offerExist = $this->offerRepository->getOffers($offerProvince, $offerCity);
+                $offerExist = $this->offerRepository->getOffers($offerProvince, $offerCity, "");
 
                 if ($offerExist) {
                     $provinces = $this->offerRepository->getProvinces();
